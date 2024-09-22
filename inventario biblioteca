@@ -108,7 +108,7 @@ if __name__ == "__main__":
                 except ValueError:
                     print("Ingresa solo el numero de páginas del libro (sin letras)")
                     pags = input("Escribe número de páginas: ")
-            libro = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
+            libros = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
             totalejemp = input("Ingresa el total de ejemplares que quieres agregar: ")
             while True:
                 try:
@@ -117,8 +117,8 @@ if __name__ == "__main__":
                 except ValueError:
                     print("Ingresa un valor entero positivo, por favor")
                     totalejemp = input("Ingresa el total de ejemplares que quieres agregar: ")
-            secuencia.agregar2(libro, totalejemp1)
-            print("La biblioteca tiene {} copias de {}".format(totalejemp, titulo))
+            secuencia.agregar2(libros, totalejemp1)
+            print("La biblioteca tiene {} copias de {}".format(totalejemp, libros.titulo))
 
         elif opcion == "3":
             if not secuencia.esta_vacia():
@@ -347,7 +347,7 @@ if __name__ == "__main__":
 
         elif opcion == "11":
             if not secuencia.esta_vacia():
-                secuencia.ordenar(comparador=titulo)
+                secuencia.ordenar()
 
         elif opcion == "12":
             pass
