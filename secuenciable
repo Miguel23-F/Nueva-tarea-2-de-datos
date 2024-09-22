@@ -107,7 +107,7 @@ class Secuenciable(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def ordenar(self, comparador):
+    def ordenar(self):
         """
         Método que permite devuelve la Secuencia de elementos ordenada.
         Utiliza Quick Sort o Merge Sort y habilita la existencia de dos comparadores
