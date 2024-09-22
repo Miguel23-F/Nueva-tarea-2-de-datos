@@ -55,11 +55,10 @@ class Secuencia(Secuenciable):
         pass
 
     def agregar2(self, elemento: T, nveces: int):
-        it1 = iter(self)
         i = 0
         try:
             while i <= nveces-1:
-                self.__datos[self.__nd] = next(it1)
+                self.__datos[self.__nd] = elemento
                 self.__nd += 1
                 i += 1
         except StopIteration:
@@ -78,6 +77,7 @@ class Secuencia(Secuenciable):
                 inicio = medio + 1
             else:
                 fin = medio - 1
+        return False
 
     def repeticiones(self, elemento: T) -> int:
         if self.contiene(elemento):
@@ -110,17 +110,13 @@ class Secuencia(Secuenciable):
 
     def eliminar1(self, elemento: T):
         if self.contiene(elemento):
-            while True:
+            while self.contiene(elemento):
                 pos=self.__encuentra(elemento)
                 if pos==self.__nd:
                     self.__nd -= 1
-                    continue
                 elif pos!= self.__nd and type(pos)==int:
                     self.__datos[self.__nd], self.__datos[pos] = self.__datos[pos], self.__datos[self.__nd]
                     self.__nd -= 1
-                    continue
-                else:
-                    break
         else:
             print("El elemento no se encuentra en la secuencia\n")
 
@@ -166,13 +162,14 @@ class Secuencia(Secuenciable):
         except StopIteration:
             pass
 
-    def ordenar(self, comparador):
+    def ordenar(self):
         arreglo = self.__datos.copy()
         if len(arreglo) > 1:
-            orden = quick_sort(arreglo.copy(), 0, self.__nd - 1, comparador)
+            orden = quick_sort(arreglo.copy(), 0, self.__nd - 1)
             for libro in orden:
                 if libro is not None:
                     print(libro)
             print()
         else:
             return arreglo
+
