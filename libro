@@ -11,7 +11,7 @@ class Libro:
             self.__edicion = 1
             self.__pags = 288
 
-        elif len(params) == 6:
+        elif len(params) == 8:
             # Constructor por parámetros
             self.__titulo = params[0]
             self.__autor = params[1]
@@ -98,7 +98,7 @@ class Libro:
                 "Editorial: {} | Número de edición: {} | Número de páginas: {}").format(self.__titulo,
                                                    self.__autor,
                                                    self.__genero,
-                                                   self.__ISBN,
+                                                   self.__ISBN, self.__publicacion, self.__editorial,
                                                    self.__edicion,
                                                    self.__pags)
 
@@ -142,6 +142,15 @@ class Libro:
                 return self.__titulo.__compare_strings( otro.__titulo)
             else:
                 return self.__genero.__compare_strings( otro.__genero)
+
+    """def comparador_titulo(self, otro_libro):
+        if self.titulo < otro_libro.titulo:
+            return -1
+        elif self.titulo > otro_libro.titulo:
+            return 1
+        else:
+            return 0
+    """
 
 
 if __name__ == "__main__":
