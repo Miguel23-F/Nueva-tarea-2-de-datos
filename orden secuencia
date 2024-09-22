@@ -1,0 +1,25 @@
+def __particion(arreglo, inicio, fin, comparador) -> int:
+    pivote = arreglo[inicio]
+    left = inicio + 1
+    right = fin
+    while True:
+        while left <= right and comparador(arreglo[left], pivote) <= 0:
+            left += 1
+        while comparador(arreglo[right], pivote) > 0 and right >= left:
+            right -= 1
+        if right < left:
+            break
+        else:  # Intercambiamos los datos que no cumplieron las condiciones
+            arreglo[left], arreglo[right] = arreglo[right], arreglo[left]
+            # Movemos el pivote a la posición correcta
+    arreglo[inicio], arreglo[right] = arreglo[right], arreglo[inicio]
+    return right  # Devolvemos la posición correcta del pivote
+
+
+def quick_sort(arreglo, inicio, fin, comparador):
+    if inicio < fin:
+        posicion_part = __particion(arreglo, inicio, fin, comparador)
+
+        quick_sort(arreglo, inicio, posicion_part - 1, comparador)
+        quick_sort(arreglo, posicion_part + 1, fin, comparador)
+        return arreglo
