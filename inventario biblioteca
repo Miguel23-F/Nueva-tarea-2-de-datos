@@ -22,8 +22,8 @@ if __name__ == "__main__":
         print("12. Listar todos los libros existentes en el inventario por orden alfabético de género y título.")
         print("13. Leer inventario desde archivo CSV.")
         print("14. Verificar si dos libros son iguales.")
-        print("14. Imprimir la ficha bibliográfica de un libro.")
-        print("15. Salir.")
+        print("15. Imprimir la ficha bibliográfica de un libro.")
+        print("16. Salir.")
         opcion = input("Elige una opción: ")
 
         if opcion == "1":
@@ -80,7 +80,7 @@ if __name__ == "__main__":
                 print("Por favor escribe el género del libro sin números ")
                 autor = input("Escribe el género del libro: ")
             ISBN = input("Escribe el ISBN del libro: ")
-            while len(ISBN) != 13 or not ISBN.isnumeric or (str(ISBN[:3]) != "978" and str(ISBN[:3]) != "979"):
+            while len(ISBN) != 13 or not ISBN.isnumeric and (str(ISBN[:3]) != "978" or str(ISBN[:3]) != "979"):
                 print("El ISBN es incorrecto, por favor ingresa uno valido ")
                 ISBN = input("Escribe el ISBN del libro: ")
             publicacion = input("Escribe el año de publicación del libro: ")
@@ -108,17 +108,17 @@ if __name__ == "__main__":
                 except ValueError:
                     print("Ingresa solo el numero de páginas del libro (sin letras)")
                     pags = input("Escribe número de páginas: ")
-            libros = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
+            libro = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
             totalejemp = input("Ingresa el total de ejemplares que quieres agregar: ")
             while True:
                 try:
-                    totalejemp1 = int(totalejemp)
+                    totalejemp = int(totalejemp)
                     break
                 except ValueError:
                     print("Ingresa un valor entero positivo, por favor")
                     totalejemp = input("Ingresa el total de ejemplares que quieres agregar: ")
-            secuencia.agregar2(libros, totalejemp1)
-            print("La biblioteca tiene {} copias de {}".format(totalejemp, libros.titulo))
+            secuencia.agregar2(libro, totalejemp)
+            print("La biblioteca tiene {} copias de {}".format(totalejemp, titulo))
 
         elif opcion == "3":
             if not secuencia.esta_vacia():
@@ -317,7 +317,7 @@ if __name__ == "__main__":
                         print("Ingresa un valor entero positivo, por favor")
                         totalejemp = input("Ingresa el total de ejemplares que quieres eliminar: ")
                 secuencia.eliminar2(libro, totalejemp1)
-                print("El libro {} fue eliminado {} vez/veces del inventario".format(titulo, totalejemp))
+                print("El libro {} fue eliminado {} vez/veces del inventario".format(titulo, totalejemp1))
             else:
                 print("El inventario está vacío")
 
@@ -350,16 +350,103 @@ if __name__ == "__main__":
                 secuencia.ordenar()
 
         elif opcion == "12":
-            pass
+            if not secuencia.esta_vacia():
+                secuencia.ordenar2(comparador=genero)
 
         elif opcion == "13":
             pass
 
         elif opcion == "14":
-            pass
+            print("Escriba los datos del primer libro: \n")
+            titulo = input("Escribe el título del libro: ")
+            autor = input("Escribe el autor del libro: ")
+            while not isinstance(autor, str):
+                print("Por favor escribe el nombre del autor sin números ")
+                autor = input("Escribe el autor del libro: ")
+            genero = input("Escribe el género del libro: ")
+            while not isinstance(genero, str):
+                print("Por favor escribe el género del libro sin números ")
+                autor = input("Escribe el género del libro: ")
+            ISBN = input("Escribe el ISBN del libro: ")
+            while len(ISBN) != 13 or not ISBN.isnumeric or (str(ISBN[:3]) != "978" and str(ISBN[:3]) != "979"):
+                print("El ISBN es incorrecto, por favor ingresa uno valido ")
+                ISBN = input("Escribe el ISBN del libro: ")
+            publicacion = input("Escribe el año de publicación del libro: ")
+            while True:
+                try:
+                    publicacion1 = int(publicacion)
+                    break
+                except ValueError:
+                    print("Ingresa solo el año de la publicación del libro (sin letras)")
+                    publicacion = input("Escribe el año de publicación del libro: ")
+            editorial = input("Escribe la editorial del libro: ")
+            edicion = input("Escribe la edición del libro: ")
+            while True:
+                try:
+                    edicion1 = int(edicion)
+                    break
+                except ValueError:
+                    print("Ingresa solo el numero de edición del libro (sin letras)")
+                    edicion = input("Escribe número de edición: ")
+            pags = input("Escribe el número de páginas del libro: ")
+            while True:
+                try:
+                    pags1 = int(pags)
+                    break
+                except ValueError:
+                    print("Ingresa solo el numero de páginas del libro (sin letras)")
+                    pags = input("Escribe número de páginas: ")
+            libro1 = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
+            print("Escribe los datos del segundo libro: \n")
+            titulo = input("Escribe el título del libro: ")
+            autor = input("Escribe el autor del libro: ")
+            while not isinstance(autor, str):
+                print("Por favor escribe el nombre del autor sin números ")
+                autor = input("Escribe el autor del libro: ")
+            genero = input("Escribe el género del libro: ")
+            while not isinstance(genero, str):
+                print("Por favor escribe el género del libro sin números ")
+                autor = input("Escribe el género del libro: ")
+            ISBN = input("Escribe el ISBN del libro: ")
+            while len(ISBN) != 13 or not ISBN.isnumeric or (str(ISBN[:3]) != "978" and str(ISBN[:3]) != "979"):
+                print("El ISBN es incorrecto, por favor ingresa uno valido ")
+                ISBN = input("Escribe el ISBN del libro: ")
+            publicacion = input("Escribe el año de publicación del libro: ")
+            while True:
+                try:
+                    publicacion1 = int(publicacion)
+                    break
+                except ValueError:
+                    print("Ingresa solo el año de la publicación del libro (sin letras)")
+                    publicacion = input("Escribe el año de publicación del libro: ")
+            editorial = input("Escribe la editorial del libro: ")
+            edicion = input("Escribe la edición del libro: ")
+            while True:
+                try:
+                    edicion1 = int(edicion)
+                    break
+                except ValueError:
+                    print("Ingresa solo el numero de edición del libro (sin letras)")
+                    edicion = input("Escribe número de edición: ")
+            pags = input("Escribe el número de páginas del libro: ")
+            while True:
+                try:
+                    pags1 = int(pags)
+                    break
+                except ValueError:
+                    print("Ingresa solo el numero de páginas del libro (sin letras)")
+                    pags = input("Escribe número de páginas: ")
+            libro2 = Libro(titulo, autor, genero, ISBN, publicacion1, editorial, edicion1, pags1)
+            if libro1 == libro2:
+                print("Ambos libros son iguales")
+            else:
+                print("Los libros no son iguales")
 
         elif opcion == "15":
-            pass
+            titulo = input("Escribe el título del libro que quieres conocer su información bibliográfica: ")
+            for libro in secuencia:
+                if libro.titulo == titulo:
+                    print(libro)
 
         else:
             print("Por favor, escoja una opción válida")
